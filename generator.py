@@ -64,10 +64,8 @@ if upload.status_code == 200:
     # --- إرسال إلى تيليجرام ---
     telegram_token = os.getenv("TELEGRAM_BOT_TOKEN")
     telegram_user_id = os.getenv("TELEGRAM_USER_ID")
-    text = f"""
-🧠 جلسة جديدة تم توليدها تلقائيًا
+    text = f"""🧠 جلسة جديدة تم توليدها تلقائيًا
 💊 التأثير: هلوسة واقعية + ترددات Theta
 ⏱️ المدة: {DURATION_MINUTES} دقيقة
 🎧 الصيغة: FLAC (48kHz, 24bit)
-🔗 رابط التحميل: {link}
-    """.strip()
+🔗 رابط التحميل: {link}""".strip()
