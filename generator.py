@@ -50,11 +50,12 @@ print(f"✅ تم تصدير الجلسة: {FILENAME}")
 # --- رفع الجلسة إلى Pixeldrain ---
 PIXELDRAIN_API_KEY = os.getenv("PIXELDRAIN_API_KEY")
 with open(FILENAME, 'rb') as f:
-    upload = requests.post(
-        'https://pixeldrain.com/api/file',
-        files={'file': f},
-        auth=(PIXELDRAIN_API_KEY, '')
-    )
+upload = requests.post(
+    'https://pixeldrain.com/api/file',
+    files={'file': f},
+    auth=(PIXELDRAIN_API_KEY, ''),
+    verify=False
+)
 
 if upload.status_code == 200:
     file_id = upload.json()['id']
