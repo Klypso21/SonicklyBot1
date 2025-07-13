@@ -1,31 +1,27 @@
-name: Generate Hallucination Session Every 3h
+name: Generate FLAC Audio Session
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *'  # كل 3 ساعات
-  workflow_dispatch:       # لتشغيل يدوي
+    - cron: "0 */3 * * *"  # كل 3 ساعات
 
 jobs:
-  build:
+  generate-session:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
+          sudo apt update
+          sudo apt install -y ffmpeg
           pip install -r requirements.txt
 
       - name: Run generator
-        env:
-          PIXELDRAIN_API_KEY: ${{ secrets.PIXELDRAIN_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
-        run: |
-          python generator.py
+        run: python generator.py
