@@ -69,8 +69,11 @@ if upload.status_code == 200:
 ⏱️ المدة: {DURATION_MINUTES} دقيقة
 🎧 الصيغة: FLAC (48kHz, 24bit)
 🔗 رابط التحميل: {link}""".strip()
-requests.post(
+
+    requests.post(
         f"https://api.telegram.org/bot{telegram_token}/sendMessage",
         json={"chat_id": telegram_user_id, "text": text}
     )
     print("📩 تم إرسال الجلسة عبر البوت.")
+else:
+    print("❌ فشل رفع الملف إلى Pixeldrain:", upload.text)
